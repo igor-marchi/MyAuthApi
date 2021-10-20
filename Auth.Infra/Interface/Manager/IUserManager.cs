@@ -11,10 +11,12 @@ namespace Auth.Infra.Interface.Manager
 
         Task<UserView> GetUsersByIdAsync(int id);
 
-        Task<UserView> InsertUserAsync(NewUserInput user);
+        Task<UserView> InsertUserAsync(NewUserInput newUserInput);
 
-        Task<UserView> UpdatetUserAsync(UpdateUserInput user);
+        Task<UserView> UpdatetUserAsync(UpdateUserInput updateUserInput);
 
         Task<UserView> DeleteUserAsync(int id);
+
+        Task<string> GenerateTokenAsync(AuthUser authUser);
     }
 }

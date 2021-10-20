@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="InputModels\Auth\" />
     <Folder Include="ViewModels\Auth\" />
   </ItemGroup>
 

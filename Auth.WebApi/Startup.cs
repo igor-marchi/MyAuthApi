@@ -19,6 +19,7 @@ namespace Auth.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddJwtConfiguration(Configuration);
             services.AddJsonConfiguration();
 
             services.AddDataBaseConfiguration(Configuration);
@@ -43,7 +44,7 @@ namespace Auth.WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseJwtConfiguration();
 
             app.UseEndpoints(endpoints =>
             {

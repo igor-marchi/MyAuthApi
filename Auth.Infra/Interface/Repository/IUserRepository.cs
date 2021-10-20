@@ -15,5 +15,6 @@ namespace Auth.Infra.Interface.Repository
         Task<User> UpdatetUserAsync(User user);
 
         Task<User> DeleteUserAsync(int id);
+        Task<User> GetByEmailAndPassword(string email, string password);
     }
 }

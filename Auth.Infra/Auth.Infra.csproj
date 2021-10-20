@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\Services\" />
-    <Folder Include="Services\" />
+    <Folder Include="Interface\Manager\" />
     <Folder Include="Validator\" />
   </ItemGroup>
 

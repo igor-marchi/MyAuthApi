@@ -1,4 +1,5 @@
-﻿using Auth.Core.Shared.ViewModels.User;
+﻿using Auth.Core.Shared.InputModels.User;
+using Auth.Core.Shared.ViewModels.User;
 using Auth.Infra.Interface.Manager;
 using Auth.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace Auth.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<UserView>> GetAll()
+        public async Task<ActionResult<UserView>> GetAllAsync()
         {
             var users = await userManager.GetAllUsersAsync();
 
@@ -26,6 +27,28 @@ namespace Auth.WebApi.Controllers
                 return BadRequest();
 
             return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserView>> GetUsersByIdAsync(int id)
+        {
+            var user = await userManager.GetUsersByIdAsync(id);
+
+            if (user == null)
+                return BadRequest();
+
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<UserView>> InsertUserAsync(NewUserInput newUserInput)
+        {
+            var user = await userManager.InsertUserAsync(newUserInput);
+
+            if (user == null)
+                return BadRequest();
+
+            return Ok(user);
         }
     }
 }

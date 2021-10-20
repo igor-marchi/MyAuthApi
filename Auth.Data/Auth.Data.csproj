@@ -13,4 +13,8 @@
 		<ProjectReference Include="..\Auth.Core\Auth.Core.csproj" />
 		<ProjectReference Include="..\Auth.Infra\Auth.Infra.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Configuration\" />
+	</ItemGroup>
 </Project>
