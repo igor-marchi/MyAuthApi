@@ -29,19 +29,19 @@ namespace Auth.Data.Repository
                 .ToListAsync();
         }
 
-        public async Task<User> GetByEmailAndPassword(string email, string password)
+        public async Task<User> GetByEmailAsync(string email)
         {
             return await context.Users
                 .Include(u => u.Roles)
                 .AsNoTracking()
-                .SingleOrDefaultAsync(u => u.Email == email
-                                      && u.Password == password);
+                .SingleOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<User> GetUsersByIdAsync(int id)
         {
             return await context.Users
                 .Include(u => u.Roles)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
 

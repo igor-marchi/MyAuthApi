@@ -9,8 +9,13 @@ namespace Auth.Infra.Mapping.UserMapping
     {
         public UserMappingProfile()
         {
+            //View
             CreateMap<User, UserView>();
+            CreateMap<User, AuthenticatedUserView>();
+
+            //Input
             CreateMap<NewUserInput, User>();
+            CreateMap<AuthUserInput, User>();
         }
     }
 }

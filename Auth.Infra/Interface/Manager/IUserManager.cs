@@ -17,6 +17,6 @@ namespace Auth.Infra.Interface.Manager
 
         Task<UserView> DeleteUserAsync(int id);
 
-        Task<string> GenerateTokenAsync(AuthUser authUser);
+        Task<AuthenticatedUserView> GenerateTokenAsync(AuthUserInput authUser);
     }
 }

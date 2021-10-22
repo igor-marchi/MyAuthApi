@@ -3,6 +3,7 @@ using Auth.Core.Shared.ViewModels.User;
 using Auth.Infra.Interface.Manager;
 using Auth.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Auth.WebApi.Controllers
@@ -23,8 +24,8 @@ namespace Auth.WebApi.Controllers
         {
             var users = await userManager.GetAllUsersAsync();
 
-            if (users == null)
-                return BadRequest();
+            if (!users.Any())
+                return BadRequest("Nenhum usuário encontrado");
 
             return Ok(users);
         }
@@ -35,7 +36,7 @@ namespace Auth.WebApi.Controllers
             var user = await userManager.GetUsersByIdAsync(id);
 
             if (user == null)
-                return BadRequest();
+                return BadRequest("Usuário informado não existe");
 
             return Ok(user);
         }

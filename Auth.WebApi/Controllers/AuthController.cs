@@ -18,7 +18,7 @@ namespace Auth.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> AuthAsync([FromBody] AuthUser authUser)
+        public async Task<ActionResult<string>> AuthAsync([FromBody] AuthUserInput authUser)
         {
             var token = await userManager.GenerateTokenAsync(authUser);
             if (token == null)

@@ -5,6 +5,8 @@ using Auth.Infra.Interface.Manager;
 using Auth.Infra.Interface.Repository;
 using Auth.Infra.Interface.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,13 +30,43 @@ namespace Auth.Infra.Manager
             throw new System.NotImplementedException();
         }
 
-        public async Task<string> GenerateTokenAsync(AuthUser authUser)
+        public async Task<AuthenticatedUserView> GenerateTokenAsync(AuthUserInput authUser)
         {
-            var user = await userRepository.GetByEmailAndPassword(authUser.Email, authUser.Password);
+            var searchedUser = mapper.Map<User>(authUser);
+
+            var user = await userRepository.GetByEmailAsync(searchedUser.Email);
             if (user == null)
                 return null;
 
-            return jwtService.GenerateToken(user);
+            if (!await VerifyUserCredentialAsync(searchedUser, user.Password))
+                return null;
+
+            var authenticatedUser = mapper.Map<AuthenticatedUserView>(user);
+            authenticatedUser.Token = jwtService.GenerateToken(user);
+
+            return authenticatedUser;
+        }
+
+        private async Task<bool> VerifyUserCredentialAsync(User user, string hash)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            var status = passwordHasher.VerifyHashedPassword(user, hash, user.Password);
+
+            switch (status)
+            {
+                case PasswordVerificationResult.Failed:
+                    return false;
+
+                case PasswordVerificationResult.Success:
+                    return true;
+
+                case PasswordVerificationResult.SuccessRehashNeeded:
+                    await UpdatetUserAsync(mapper.Map<UpdateUserInput>(user)); //update hash
+                    return true;
+
+                default:
+                    throw new InvalidOperationException();
+            }
         }
 
         public async Task<IEnumerable<UserView>> GetAllUsersAsync()
@@ -50,12 +82,19 @@ namespace Auth.Infra.Manager
         public async Task<UserView> InsertUserAsync(NewUserInput newUserInput)
         {
             var user = mapper.Map<User>(newUserInput);
+            PasswordToHashConverter(user);
             return mapper.Map<UserView>(await userRepository.InsertUserAsync(user));
         }
 
         public Task<UserView> UpdatetUserAsync(UpdateUserInput updateUserInput)
         {
             throw new System.NotImplementedException();
+        }
+
+        private static void PasswordToHashConverter(User user)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            user.Password = passwordHasher.HashPassword(user, user.Password);
         }
     }
 }

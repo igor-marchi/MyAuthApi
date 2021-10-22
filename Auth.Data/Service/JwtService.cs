@@ -36,8 +36,8 @@ namespace Auth.Data.Service
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email), //User.Identity.Name
-                new Claim("id", user.Id.ToString()), // User.Identity.Id ?
+                new Claim(ClaimTypes.Name, user.Id.ToString()), //User.Identity.Name
+                new Claim(ClaimTypes.Email, user.Email), //User.Identity.Email
             };
 
             claims.AddRange(user.Roles.Select(x => new Claim(ClaimTypes.Role, x.Description))); //User.Identity.Role
