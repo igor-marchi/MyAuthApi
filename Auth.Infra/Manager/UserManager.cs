@@ -82,8 +82,16 @@ namespace Auth.Infra.Manager
         public async Task<UserView> InsertUserAsync(NewUserInput newUserInput)
         {
             var user = mapper.Map<User>(newUserInput);
+            if (await ExistUserEmail(user.Email))
+                return null;
+
             PasswordToHashConverter(user);
             return mapper.Map<UserView>(await userRepository.InsertUserAsync(user));
+        }
+
+        private async Task<bool> ExistUserEmail(string userEmail)
+        {
+            return await userRepository.ExistEmailAsync(userEmail);
         }
 
         public Task<UserView> UpdatetUserAsync(UpdateUserInput updateUserInput)

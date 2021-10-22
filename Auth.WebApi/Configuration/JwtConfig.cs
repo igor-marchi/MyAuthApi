@@ -32,9 +32,10 @@ namespace Auth.WebApi.Configuration
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = true,
+                    ValidateLifetime = true,
+
+                    ValidateIssuer = false,
                     ValidateAudience = false,
-                    ValidateLifetime = false,
                     //ValidIssuer = issuer,
                     //ValidAudience = audience,
                 };

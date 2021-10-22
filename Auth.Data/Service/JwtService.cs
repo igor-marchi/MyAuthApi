@@ -32,7 +32,7 @@ namespace Auth.Data.Service
             var key = Encoding.ASCII.GetBytes(configuration.GetSection("Jwt:Secret").Value);
             //var audience = configuration.GetSection("Jwt:Audience").Value;
             //var issuer = configuration.GetSection("Jwt:Issuer").Value;
-            //var expires = configuration.GetSection("Jwt:Expires").Value;
+            var expires = configuration.GetSection("Jwt:Expires").Value;
 
             var claims = new List<Claim>
             {
@@ -44,11 +44,10 @@ namespace Auth.Data.Service
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = DateTime.UtcNow.AddHours(1),
                 Subject = new ClaimsIdentity(claims),
                 //Audience = audience,
                 //Issuer = issuer,
-                //Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(expires)),
+                Expires = DateTime.UtcNow.AddHours(Convert.ToInt32(expires)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
             };
 

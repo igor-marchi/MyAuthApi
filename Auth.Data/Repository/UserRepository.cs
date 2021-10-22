@@ -37,6 +37,11 @@ namespace Auth.Data.Repository
                 .SingleOrDefaultAsync(u => u.Email == email);
         }
 
+        public async Task<bool> ExistEmailAsync(string email)
+        {
+            return await context.Users.AnyAsync(u => u.Email == email);
+        }
+
         public async Task<User> GetUsersByIdAsync(int id)
         {
             return await context.Users

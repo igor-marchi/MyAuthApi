@@ -2,6 +2,7 @@
 using Auth.Core.Shared.ViewModels.User;
 using Auth.Infra.Interface.Manager;
 using Auth.WebApi.Controllers.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace Auth.WebApi.Controllers
             this.userManager = userManager;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserView>> GetAllAsync()
         {
@@ -30,6 +32,7 @@ namespace Auth.WebApi.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserView>> GetUsersByIdAsync(int id)
         {
@@ -47,7 +50,7 @@ namespace Auth.WebApi.Controllers
             var user = await userManager.InsertUserAsync(newUserInput);
 
             if (user == null)
-                return BadRequest();
+                return BadRequest("Email já cadastrado!");
 
             return Ok(user);
         }
