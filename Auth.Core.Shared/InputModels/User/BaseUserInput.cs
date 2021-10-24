@@ -8,6 +8,6 @@ namespace Auth.Core.Shared.InputModels.User
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public IEnumerable<RoleReference> Roles { get; set; }
+        public IEnumerable<RoleReferenceInput> Roles { get; set; }
     }
 }

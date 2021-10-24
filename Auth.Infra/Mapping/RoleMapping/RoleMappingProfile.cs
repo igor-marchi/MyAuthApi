@@ -10,7 +10,7 @@ namespace Auth.Infra.Mapping.RoleMapping
         public RoleMappingProfile()
         {
             CreateMap<Role, RoleView>();
-            CreateMap<RoleReference, Role>();
+            CreateMap<RoleReferenceInput, Role>();
         }
     }
 }

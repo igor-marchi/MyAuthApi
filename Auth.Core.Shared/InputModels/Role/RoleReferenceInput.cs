@@ -1,6 +1,6 @@
 ﻿namespace Auth.Core.Shared.InputModels.Role
 {
-    public class RoleReference
+    public class RoleReferenceInput
     {
         public int Id { get; set; }
     }

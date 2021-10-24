@@ -20,7 +20,7 @@ namespace Auth.WebApi
         {
             services.AddControllers();
             services.AddJwtConfiguration(Configuration);
-            services.AddJsonConfiguration();
+            services.AddFluentValidationAndJsonConfiguration();
 
             services.AddDataBaseConfiguration(Configuration);
             services.AddRepositoryDependencyInjectionConfiguration();
