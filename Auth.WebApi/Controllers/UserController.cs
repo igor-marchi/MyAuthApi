@@ -3,6 +3,7 @@ using Auth.Core.Shared.ViewModels.User;
 using Auth.Infra.Interface.Manager;
 using Auth.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +21,18 @@ namespace Auth.WebApi.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
+        /// <summary>
+        /// Busca todos os clientes cadastrados
+        /// </summary>
+        /// <returns>Retorna uma lista dos clientes cadastrados</returns>
+        //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserView>> GetAllAsync()
+        [ProducesResponseType(typeof(UserView), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllAsync()
         {
             var users = await userManager.GetAllUsersAsync();
-
             if (!users.Any())
                 return BadRequest("Nenhum usuário encontrado");
 
