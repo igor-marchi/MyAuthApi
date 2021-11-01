@@ -25,6 +25,7 @@ namespace Auth.WebApi
             services.AddDataBaseConfiguration(Configuration);
             services.AddRepositoryDependencyInjectionConfiguration();
             services.AddManagerDependencyInjectionConfiguration();
+            services.AddServiceDependencyInjectionConfiguration();
             services.AddAutoMapperConfiguration();
             services.AddSwaggerConfiguration();
         }

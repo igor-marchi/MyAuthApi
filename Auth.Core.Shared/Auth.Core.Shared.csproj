@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\105859\Desktop\estudos\Auth\Auth.WebApi\Auth.Core.Shared.xml</DocumentationFile>
+    <DocumentationFile>H:\Estudos\Projetos\.net\MyAuthApi\Auth.WebApi\Auth.Core.Shared.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 

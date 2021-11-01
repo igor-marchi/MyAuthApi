@@ -1,6 +1,8 @@
 ﻿using Auth.Core.Shared.InputModels.User;
+using Auth.Core.Shared.RabbitMq;
 using Auth.Core.Shared.ViewModels.User;
 using Auth.Infra.Interface.Manager;
+using Auth.Infra.Interface.Services;
 using Auth.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +17,12 @@ namespace Auth.WebApi.Controllers
     public class UserController : MainController
     {
         private readonly IUserManager userManager;
+        private readonly IPublishService publishService;
 
-        public UserController(IUserManager userManager)
+        public UserController(IUserManager userManager, IPublishService publishService)
         {
             this.userManager = userManager;
+            this.publishService = publishService;
         }
 
         /// <summary>
@@ -58,6 +62,14 @@ namespace Auth.WebApi.Controllers
 
             if (user == null)
                 return BadRequest("Email já cadastrado!");
+
+            var emailData = new EmailData
+            {
+                EmailAddress = user.Email,
+                Content = "Seu usuário foi criado"
+            };
+            
+            _ = publishService.PublishEmailService(emailData);
 
             return Ok(user);
         }
