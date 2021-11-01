@@ -19,11 +19,13 @@ namespace Auth.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddJsonConfiguration();
+            services.AddJwtConfiguration(Configuration);
+            services.AddFluentValidationAndJsonConfiguration();
 
             services.AddDataBaseConfiguration(Configuration);
             services.AddRepositoryDependencyInjectionConfiguration();
             services.AddManagerDependencyInjectionConfiguration();
+            services.AddServiceDependencyInjectionConfiguration();
             services.AddAutoMapperConfiguration();
             services.AddSwaggerConfiguration();
         }
@@ -43,7 +45,7 @@ namespace Auth.WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseJwtConfiguration();
 
             app.UseEndpoints(endpoints =>
             {

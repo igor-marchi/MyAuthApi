@@ -1,4 +1,5 @@
 ﻿using Auth.Core.Domain;
+using Auth.Core.Shared.InputModels.Role;
 using Auth.Core.Shared.ViewModels.Role;
 using AutoMapper;
 
@@ -9,6 +10,7 @@ namespace Auth.Infra.Mapping.RoleMapping
         public RoleMappingProfile()
         {
             CreateMap<Role, RoleView>();
+            CreateMap<RoleReferenceInput, Role>();
         }
     }
 }

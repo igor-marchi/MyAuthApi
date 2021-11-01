@@ -15,5 +15,9 @@ namespace Auth.Infra.Interface.Repository
         Task<User> UpdatetUserAsync(User user);
 
         Task<User> DeleteUserAsync(int id);
+
+        Task<User> GetByEmailAsync(string email);
+
+        Task<bool> ExistEmailAsync(string email);
     }
 }

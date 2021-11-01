@@ -1,22 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interface\Services\" />
-    <Folder Include="Services\" />
-    <Folder Include="Validator\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Interface\Manager\" />
+		<Folder Include="Validator\InputModels\Auth\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.11" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Auth.Core.Shared\Auth.Core.Shared.csproj" />
-    <ProjectReference Include="..\Auth.Core\Auth.Core.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\Auth.Core.Shared\Auth.Core.Shared.csproj" />
+		<ProjectReference Include="..\Auth.Core\Auth.Core.csproj" />
+	</ItemGroup>
 </Project>

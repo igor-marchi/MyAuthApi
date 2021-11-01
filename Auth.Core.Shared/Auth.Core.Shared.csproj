@@ -4,8 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>H:\Estudos\Projetos\.net\MyAuthApi\Auth.WebApi\Auth.Core.Shared.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Folder Include="InputModels\Auth\" />
     <Folder Include="ViewModels\Auth\" />
   </ItemGroup>
 

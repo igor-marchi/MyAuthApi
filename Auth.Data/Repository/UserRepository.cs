@@ -29,14 +29,45 @@ namespace Auth.Data.Repository
                 .ToListAsync();
         }
 
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            return await context.Users
+                .Include(u => u.Roles)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<bool> ExistEmailAsync(string email)
+        {
+            return await context.Users.AnyAsync(u => u.Email == email);
+        }
+
         public async Task<User> GetUsersByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await context.Users
+                .Include(u => u.Roles)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<User> InsertUserAsync(User user)
         {
-            throw new System.NotImplementedException();
+            await InsertUserRoleAsync(user);
+
+            await context.Users.AddAsync(user);
+            await context.SaveChangesAsync();
+            return user;
+        }
+
+        private async Task InsertUserRoleAsync(User user)
+        {
+            var roleList = new List<Role>();
+
+            foreach (var role in user.Roles)
+            {
+                roleList.Add(await context.Roles.FindAsync(role.Id));
+            }
+            user.Roles = roleList;
         }
 
         public async Task<User> UpdatetUserAsync(User user)

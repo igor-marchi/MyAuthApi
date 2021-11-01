@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Auth.Core.Shared.InputModels.Role;
+using System.Collections.Generic;
 
 namespace Auth.Core.Shared.InputModels.User
 {
@@ -7,6 +8,6 @@ namespace Auth.Core.Shared.InputModels.User
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public IEnumerable<int> IdRoles { get; set; }
+        public IEnumerable<RoleReferenceInput> Roles { get; set; }
     }
 }
