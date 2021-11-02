@@ -1,10 +1,3 @@
-# MyAuthAPI
-
-# Comando para rodar o rabbit com docker
-
-login
-user/password: guest
-
 <h1 align="center">
     MyAuthAPI
     <br>
@@ -43,7 +36,7 @@ This project was developed with the following technologies:
 ```bash
 # Clone this repository
 $ git clone https://github.com/igor-marchi/MyAuthApi.git MyAuthApi
-# Run RabbitMq in docker on localhost:15672
+# Run RabbitMq in docker on localhost:15672 | user/password: guest
 $ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
 # Go into Auth.WebApi repository
 $ cd MyAuthApi/Auth.WebApi
