@@ -30,6 +30,7 @@ This project was developed with the following technologies:
 - [EntityFramework](https://docs.microsoft.com/pt-br/ef/) - ORM
 - [FluentValidation](https://fluentvalidation.net/) - Validações dos inputs da API
 - [AutoMapper](https://automapper.org/) - Mapeamento de entidades, modelos (ex: Entity -> DTOs -> Views)
+- [Swagger](https://swagger.io/) - Documentação
 
 ## :information_source: How To Use
 
